@@ -4,7 +4,7 @@ import dotenv from 'dotenv';
 dotenv.config();
 
 mongoose.connect(process.env.MONGO).then(() =>{
-    console.log('conneted to database');
+    console.log('conneted to database!');
 
 }).catch((err) => {
     console.log('connection failed');
