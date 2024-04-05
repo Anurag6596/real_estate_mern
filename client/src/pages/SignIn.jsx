@@ -1,10 +1,15 @@
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import OAuth from '../components/OAuth';
+
+
 export default function SignIn() {
   const [formData, setFromData] = useState({})
-  const [error ,setError] = useState(null);
+  const [error ,setError] = useState(null); 
   const [loading , setLoading ]=useState(false);
+  // const { loading, error } = useSelector((state) => state.user);
   const navigate = useNavigate();
+  // const dispatch = useDispatch();
 
   const handleChange = (e) => {
     setFromData(
@@ -19,7 +24,8 @@ export default function SignIn() {
     e.preventDefault();
     try {
       
-      setLoading(true);
+      setLoading(true); 
+      // dispatch(signInStart());
       const res = await fetch('/api/auth/signin', 
       {
         method: 'POST',
@@ -30,15 +36,18 @@ export default function SignIn() {
       console.log(data); 
       if(data.success === false){
         setLoading(false);
-        setError(data.message);
+        setError(data.message); 
+        // dispatch(sinInFailure(data.message));
         return;
       }
-      setLoading(false);
+      setLoading(false); 
+      // dispatch(signInSuccess(data));
       setError(null);
       navigate('/');
     } catch (error) {
       setLoading(false)
-      setError(error.message);
+      setError(error.message); 
+      // dispatch(sinInFailure(error.message));
     }
   };
   // console.log(formData);
@@ -57,6 +66,7 @@ export default function SignIn() {
         <button disabled={loading} className="bg-slate-700 text-white p-3 rounded-lg uppercase hover:opacity-95 disabled:opacity-80">
           {loading ? 'loading....' : 'sign In'}
         </button>
+        <OAuth />
       </form>
       <div className=" flex gap-2 mt-5">
         <p> Dont have an Account?</p>
@@ -68,3 +78,5 @@ export default function SignIn() {
     </div>
   )
 }
+
+// did not included redux toolkit cause it wasnt supporting and giving the token 'user' error;
