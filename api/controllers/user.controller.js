@@ -8,7 +8,8 @@ export const test = (req, res) =>{
     })
 }
 
-// created a function for updating user 
+// created a function for updating user  
+// will add this later
 
 export const updateUser = async (req, res, next) => {
     if (req.user.id !== req.params.id)
@@ -38,3 +39,5 @@ export const updateUser = async (req, res, next) => {
       next(error);
     }
   };
+
+// 
